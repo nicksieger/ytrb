@@ -1,0 +1,5 @@
+fix: true
+
+ignore:
+- ytrb.gemspec
+- Rakefile
