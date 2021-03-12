@@ -1,8 +1,10 @@
 # Ytrb
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/ytrb`. To experiment with that code, run `bin/console` for an interactive prompt.
+Ytrb is a simple YAML+ERB templating library in Ruby. With Ytrb:
 
-TODO: Delete this and the text above, and describe your gem
+- Generate large, verbose YAML files from reusable templates. 
+- Collect and organize reusable template methods in multiple files and `import` them into each template.
+- Indent template items correctly and intuitively.
 
 ## Installation
 
@@ -33,7 +35,6 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/nicksieger/ytrb. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/nicksieger/ytrb/blob/master/CODE_OF_CONDUCT.md).
-
 
 ## License
 
