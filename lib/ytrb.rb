@@ -3,6 +3,9 @@ require "erubi"
 require "erubi/capture_end"
 
 module Ytrb
+  def self.expand(template, binding: nil)
+    Ytrb::Engine.new(template).result(binding)
+  end
 end
 
 require "ytrb/core_ext"
