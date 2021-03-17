@@ -4,7 +4,7 @@ class Ytrbium::Engine < Erubi::CaptureEndEngine
     stack_var = @defstack = "@_ybuf_stack"
     engine = self
     @template_module.module_eval do
-      instance_variable_set(:@_engine, engine)
+      instance_variable_set(:@engine, engine)
       instance_variable_set(stack_var.to_sym, [])
     end
     bufvar = "@_ybuf"

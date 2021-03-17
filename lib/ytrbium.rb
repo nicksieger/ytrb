@@ -4,7 +4,7 @@ require "erubi/capture_end"
 
 module Ytrbium
   def self.expand(template, binding: nil)
-    dsl._engine(template).expand(binding)
+    dsl.engine(template).expand(binding)
   end
 
   def self.dsl
