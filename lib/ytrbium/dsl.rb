@@ -4,8 +4,17 @@ module Ytrbium
       @_file_resolver ||= FileResolver.new
     end
 
+    def _engine(input = nil, options = {})
+      @_engine = nil if input
+      @_engine ||= Engine.new(input, options)
+    end
+
+    def expand(binding = nil)
+      _engine.expand(binding)
+    end
+
     def call(options = {})
-      YAML.safe_load @_engine.result(binding)
+      YAML.safe_load expand(binding)
     end
 
     def expand_path(name)
@@ -15,7 +24,7 @@ module Ytrbium
     def import(name, as: nil, **options)
       mod = Ytrbium.dsl
       _file_resolver.load(name) do |io, filename|
-        Engine.new(io.read, filename: filename, module: mod)
+        _engine(io.read, filename: filename, module: mod)
       end
       if as
         define_method(as) { mod }

@@ -17,7 +17,7 @@ class Ytrbium::Engine < Erubi::CaptureEndEngine
                                regexp: /<%(\|?={1,2}|!|-|\#|%|\|)?(.*?)([-=])?%>([ \t]*\r?\n)?/m))
   end
 
-  def result(b = nil)
+  def expand(b = nil)
     mod_src = src
     args = []
     args.unshift @filename, 1 if @filename
