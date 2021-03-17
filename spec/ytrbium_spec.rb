@@ -1,8 +1,7 @@
 require "spec_helper"
-
 require "ytrbium"
 
-def get_binding(a, b)
+def example_binding(a, b)
   c = true
   binding
 end
@@ -20,7 +19,7 @@ RSpec.describe Ytrbium do
   end
 
   describe "with a simple binding" do
-    b = get_binding(1, "hello")
+    b = example_binding(1, "hello")
 
     expect_template "a: <%= b %>", -> { eq("---\na: hello") }, binding: b
     expect_template "a: <%= a %>\nb: <%= b %>\nc: <%= c %>", -> { eq("---\na: 1\nb: hello\nc: true") }, binding: b
