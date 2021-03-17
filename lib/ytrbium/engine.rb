@@ -1,11 +1,9 @@
 class Ytrbium::Engine < Erubi::CaptureEndEngine
   def initialize(input, options = {})
-    @template_module = options[:module] || Module.new
+    @template_module = options[:module] || Ytrbium.dsl
     stack_var = @defstack = "@_ybuf_stack"
     engine = self
     @template_module.module_eval do
-      include Ytrbium::DSL
-      extend self
       instance_variable_set(:@_engine, engine)
       instance_variable_set(stack_var.to_sym, [])
     end

@@ -6,6 +6,13 @@ module Ytrbium
   def self.expand(template, binding: nil)
     Ytrbium::Engine.new(template).result(binding)
   end
+
+  def self.dsl
+    Module.new do
+      include Ytrbium::DSL
+      extend self
+    end
+  end
 end
 
 require "ytrbium/core_ext"

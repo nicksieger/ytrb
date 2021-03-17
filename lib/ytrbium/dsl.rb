@@ -13,7 +13,7 @@ module Ytrbium
     end
 
     def import(name, as: nil, **options)
-      mod = Module.new
+      mod = Ytrbium.dsl
       _file_resolver.load(name) do |io, filename|
         Engine.new(io.read, filename: filename, module: mod)
       end
