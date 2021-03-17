@@ -1,14 +1,14 @@
-require_relative 'lib/ytrb/version'
+require_relative 'lib/ytrbium/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "ytrb"
-  spec.version       = Ytrb::VERSION
+  spec.name          = "ytrbium"
+  spec.version       = Ytrbium::VERSION
   spec.authors       = ["Nick Sieger"]
   spec.email         = ["nick@nicksieger.com"]
 
   spec.summary       = %q{Simple YAML+ERB templating in Ruby}
   spec.description   = %q{Make YAML+ERB templating DWIM and reusable.}
-  spec.homepage      = "https://github.com/nicksieger/ytrb"
+  spec.homepage      = "https://github.com/nicksieger/ytrbium"
   spec.license       = "MIT"
   spec.required_ruby_version = Gem::Requirement.new(">= 2.3.0")
 

@@ -1,13 +1,13 @@
 require "spec_helper"
 
-require "ytrb"
+require "ytrbium"
 
 def get_binding(a, b)
   c = true
   binding
 end
 
-RSpec.describe Ytrb do
+RSpec.describe Ytrbium do
   expect_template "", -> { eq("---\n") }
 
   expect_template({"a" => true}.bare_yaml, -> { eq("---\na: true\n") })
@@ -152,13 +152,13 @@ RSpec.describe Ytrb do
     end
 
     it "parses to the expected object" do
-      expect(YAML.safe_load(Ytrb.expand(template))).to eq(expected)
+      expect(YAML.safe_load(Ytrbium.expand(template))).to eq(expected)
     end
 
     describe "with extra whitespace" do
       let(:template) { template.gsub(/-%>/, "%>") }
       it "parses to the expected object" do
-        expect(YAML.safe_load(Ytrb.expand(template))).to eq(expected)
+        expect(YAML.safe_load(Ytrbium.expand(template))).to eq(expected)
       end
     end
   end
@@ -187,7 +187,7 @@ RSpec.describe Ytrb do
     TEMPL
 
     before do
-      allow_any_instance_of(Ytrb::FileResolver).to receive(:load).and_yield(StringIO.new(import_template), "address.template.yaml")
+      allow_any_instance_of(Ytrbium::FileResolver).to receive(:load).and_yield(StringIO.new(import_template), "address.template.yaml")
     end
 
     expect_template template, -> do
@@ -219,7 +219,7 @@ RSpec.describe Ytrb do
     TEMPL
 
     before do
-      allow_any_instance_of(Ytrb::FileResolver).to receive(:load).and_yield(StringIO.new(import_template), "address.template.yaml")
+      allow_any_instance_of(Ytrbium::FileResolver).to receive(:load).and_yield(StringIO.new(import_template), "address.template.yaml")
     end
 
     expect_template template, -> do
@@ -249,7 +249,7 @@ RSpec.describe Ytrb do
     TEMPL
 
     before do
-      allow_any_instance_of(Ytrb::FileResolver).to receive(:load).and_yield(StringIO.new(import_template), "address.template.yaml")
+      allow_any_instance_of(Ytrbium::FileResolver).to receive(:load).and_yield(StringIO.new(import_template), "address.template.yaml")
     end
 
     expect_template template, -> do

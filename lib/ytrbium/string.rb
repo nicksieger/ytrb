@@ -1,4 +1,4 @@
-class Ytrb::String < ::String
+class Ytrbium::String < ::String
   def initialize
     super
     @indent = 0

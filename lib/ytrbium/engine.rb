@@ -1,16 +1,16 @@
-class Ytrb::Engine < Erubi::CaptureEndEngine
+class Ytrbium::Engine < Erubi::CaptureEndEngine
   def initialize(input, options = {})
     @template_module = options[:module] || Module.new
     stack_var = @defstack = "@_ybuf_stack"
     engine = self
     @template_module.module_eval do
-      include Ytrb::DSL
+      include Ytrbium::DSL
       extend self
       instance_variable_set(:@_engine, engine)
       instance_variable_set(stack_var.to_sym, [])
     end
     bufvar = "@_ybuf"
-    bufval = "Ytrb::String.new"
+    bufval = "Ytrbium::String.new"
     super(input, options.merge(bufval: bufval,
                                bufvar: bufvar,
                                preamble: "options ||= {}; #{bufvar} = #{bufval};",

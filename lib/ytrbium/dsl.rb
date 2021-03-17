@@ -1,4 +1,4 @@
-module Ytrb
+module Ytrbium
   module DSL
     def _file_resolver
       @_file_resolver ||= FileResolver.new

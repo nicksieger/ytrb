@@ -1,6 +1,6 @@
 require "pathname"
 
-class Ytrb::FileResolver
+class Ytrbium::FileResolver
   def initialize(root = Dir.getwd)
     @paths = [root, *$LOAD_PATH].map { |p| Pathname.new(p) }
   end

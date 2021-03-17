@@ -1,5 +1,5 @@
 fix: true
 
 ignore:
-- ytrb.gemspec
+- ytrbium.gemspec
 - Rakefile
