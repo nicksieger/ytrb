@@ -24,7 +24,7 @@ module Ytrbium
     def import(name, as: nil, **options)
       mod = Ytrbium.dsl
       file_resolver.load(name) do |io, filename|
-        engine(io.read, filename: filename, module: mod)
+        mod.engine(io.read, filename: filename, module: mod)
       end
       if as
         define_method(as) { mod }
