@@ -24,7 +24,72 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Basic usage is demonstrated by a simple example:
+
+```ruby
+require "ytrbium"
+template = <<~TEMPL
+  <%! def hello(times) -%>
+    <% times.times do |n| -%>
+    - Hi <%= n + 1 %>!
+    <% end -%>
+  <%! end -%>
+  msg:
+  <%= hello(options[:count] || 4) -%>
+TEMPL
+
+Ytrbium.expand(template)
+# =>
+#  msg:
+#  - Hi 1
+#  - Hi 2
+#  - Hi 3
+#  - Hi 4
+
+options = { count: 2 }
+puts Ytrbium.expand(template, binding: binding)
+# =>
+#  msg:
+#  - Hi 1
+#  - Hi 2
+```
+
+A Ytrbium template is an [ERB template](https://ruby-doc.org/stdlib-2.7.1/libdoc/erb/rdoc/ERB.html) over a YAML document with some additional YAML-specific functionality:
+
+1. You can declare re-usable functions in the template
+2. You can split templates across files and `import` them into a main template
+3. Every line of each dynamic ERB tag's content is indented correctly in its surroundings, which enables you to apply 1. and 2. with impunity and not worry that your resulting document is structured incorrectly.
+
+Expanding the previous example:
+
+examples/hello.template.yaml:
+```yaml
+<%! def hello(times) -%>
+  <% times.times do |n| -%>
+  - Hi <%= n + 1 %>!
+  <% end -%>
+<%! end -%>
+```
+
+examples/main.template.yaml:
+```yaml
+<% import 'hello.template.yaml' -%>
+one_message:
+  <%= hello(1) -%>
+  - final_messages:
+    <%= hello(2) -%>
+```
+
+Run the `ytrbium` command on the main template:
+```
+ytrbium examples/main.template.yaml
+---
+one_message:
+  - Hi 1!
+  - final_messages:
+    - Hi 1!
+    - Hi 2!
+```
 
 ## Development
 

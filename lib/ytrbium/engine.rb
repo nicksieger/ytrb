@@ -11,7 +11,7 @@ class Ytrbium::Engine < Erubi::CaptureEndEngine
     bufval = "Ytrbium::String.new"
     super(input, options.merge(bufval: bufval,
                                bufvar: bufvar,
-                               preamble: "options ||= {}; #{bufvar} = #{bufval};",
+                               preamble: "options ||= {}; #{stack_var} = []; #{bufvar} = #{bufval};",
                                escape: true,
                                escapefunc: "@_ybuf.indent_expr",
                                regexp: /<%(\|?={1,2}|!|-|\#|%|\|)?(.*?)([-=])?%>([ \t]*\r?\n)?/m))

@@ -1,0 +1,5 @@
+<% import 'hello.template.yaml' -%>
+one_message:
+  <%= hello(1) -%>
+  - final_messages:
+    <%= hello(2) -%>

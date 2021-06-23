@@ -1,0 +1,5 @@
+<%! def hello(times) -%>
+  <% times.times do |n| -%>
+  - Hi <%= n + 1 %>!
+  <% end -%>
+<%! end -%>

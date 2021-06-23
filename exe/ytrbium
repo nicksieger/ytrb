@@ -1,0 +1,37 @@
+#!/usr/bin/env ruby
+
+require "ytrbium"
+require "optparse"
+
+paths = []
+OptionParser.new do |opts|
+  opts.banner = "usage: ytrbium [options] template"
+
+  opts.on "-i", "--include DIR", "Add DIR to the list of paths to search for templates" do |i|
+    paths << i
+  end
+
+  opts.on("-h", "--help", "Print this message") do
+    puts opts
+    exit
+  end
+
+  opts.on("-v", "--version", "Print version") do
+    puts "Ytrbium v#{Ytrbium::VERSION}"
+    exit
+  end
+end.parse!
+
+paths += Ytrbium.paths
+Ytrbium.paths = paths
+
+if ARGV.present?
+  puts(*ARGV.map do |template|
+         Ytrbium.paths = [File.dirname(template)] + paths
+         Ytrbium.expand(IO.read(template))
+       end)
+elsif (template = STDIN.read).present?
+  puts(Ytrbium.expand(template))
+else
+  puts "Please provide one or more template files to expand."
+end
