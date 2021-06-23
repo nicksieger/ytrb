@@ -19,5 +19,5 @@ end
 
 module RSpec::Matchers
   # Enable use of expects like `it { expects(...).to eq(...) }`
-  alias expects expect
+  alias_method :expects, :expect
 end
