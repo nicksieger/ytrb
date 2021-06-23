@@ -1,7 +1,6 @@
 require "yaml"
 require "erubi"
 require "erubi/capture_end"
-require "ytrbium/file_resolver"
 
 module Ytrbium
   def self.expand(template, binding: nil)
@@ -9,7 +8,7 @@ module Ytrbium
   end
 
   def self.dsl
-    resolver = @file_resolver
+    resolver = file_resolver
     Module.new do
       @file_resolver = resolver
       include Ytrbium::DSL
@@ -18,16 +17,19 @@ module Ytrbium
   end
 
   def self.paths
-    @file_resolver.paths
+    file_resolver.paths
   end
 
   def self.paths=(paths)
-    @file_resolver.paths = paths
+    file_resolver.paths = paths
   end
 
-  @file_resolver = FileResolver.new
+  def self.file_resolver
+    @file_resolver ||= FileResolver.new
+  end
 end
 
+require "ytrbium/file_resolver"
 require "ytrbium/core_ext"
 require "ytrbium/dsl"
 require "ytrbium/engine"
