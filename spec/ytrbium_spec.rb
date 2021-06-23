@@ -7,6 +7,23 @@ def example_binding(a, b)
 end
 
 RSpec.describe Ytrbium do
+  describe "paths" do
+    before { @paths = Ytrbium.paths }
+    after { Ytrbium.paths = @paths }
+
+    it "is set to Dir.getwd by default" do
+      expect(Ytrbium.paths).to eq([Dir.getwd])
+    end
+
+    it "is shared with all Ytrbium.dsl modules" do
+      mods = 2.times.map { Ytrbium.dsl }
+      Ytrbium.paths = Gem.dir
+      mods.each do |m|
+        expect(m.file_resolver.paths).to eq([Gem.dir])
+      end
+    end
+  end
+
   expect_template "", -> { eq("---\n") }
 
   expect_template({"a" => true}.bare_yaml, -> { eq("---\na: true\n") })
