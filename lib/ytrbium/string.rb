@@ -12,7 +12,7 @@ class Ytrbium::String < ::String
         @last_newline = str.rindex("\n")
         @indent = 0
       end
-      if @indent == 0 && self[@last_newline..] =~ /\n([- ]+)\Z/m
+      if @indent == 0 && self[@last_newline..-1] =~ /\n([- ]+)\Z/m
         @indent = $1.length
       end
     end
